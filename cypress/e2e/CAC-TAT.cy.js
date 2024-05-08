@@ -80,7 +80,7 @@ describe("Central de atentimento ao Cliente TAT", () => {
   it("marca o tipo de atendimento 'Feedback'", () => {
     cy.get('input[type="radio"][value="feedback"]')
       .check()
-      .should("have.value", "feedback");
+      .should("have.value", "feedbac");
   });
   it("marca cada tipo de atendimento", () => {
     cy.get('input[type="radio"]')
