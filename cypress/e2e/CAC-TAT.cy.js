@@ -7,16 +7,22 @@ describe("Central de atentimento ao Cliente TAT", () => {
   it("Verifique o titulo da aplicação", () => {
     cy.title().should("include", "Central de Atendimento ao Cliente TAT");
   });
-  it("Preenche os campos obrigatorios e envia o formulario", () => {
+  it.only("Preenche os campos obrigatorios e envia o formulario", () => {
     const longText =
       "Teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste";
+
+    cy.clock();
 
     cy.get("#firstName").click().type("Thiago");
     cy.get("#lastName").click().type("Rodrigues");
     cy.get("#email").click().type("thiago@qa.com");
     cy.get("#open-text-area").click().type(longText, { delay: 0 });
     cy.contains("button", "Enviar").click();
+
     cy.get(".success").should("be.visible");
+    cy.tick(3000);
+
+    cy.get(".success").should("not.be.visible");
   });
   it("Exibe mensagem de erro ao submeter o formulário com um email com formatação inválida", () => {
     cy.get("#firstName").click().type("Thiago");
